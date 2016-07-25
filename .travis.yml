@@ -22,6 +22,7 @@ before_script:
   - sleep 10
   - "psql -c 'create database inbify_test;' -U postgres"
   - echo "script.inline: true" >> /etc/elasticsearch/config/elasticsearch.yml
+  - echo $PATH
 
 script:
   - "npm test"
