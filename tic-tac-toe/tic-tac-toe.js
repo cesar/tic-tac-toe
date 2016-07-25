@@ -33,7 +33,7 @@ function drawBoard(board) {
  * Board is a two dimensional array
  */
 function checkStatus(board) {
-    var flag = false;   
+    var flag = false;
       if((board[0][0] == board[1][1] && board[0][0] == board[2][2]) || (board[0][2] == board[1][1] && board[0][2] == board[2][0])) {
           flag = true;
       } else {
@@ -44,7 +44,7 @@ function checkStatus(board) {
               }
           }
       }
-      return flag;        
+      return flag;
 }
 
 function promptUser(player) {
@@ -83,54 +83,52 @@ function getColumn(num) {
     return Math.floor(((num - 1) % 3));
 }
 
-function play() {
 
-    var board = initBoard(board);
+var board = initBoard(board);
 
-    console.log(chalk.green('\nWelcome to TIC-TAC-TOE'));
+console.log(chalk.green('\nWelcome to TIC-TAC-TOE'));
 
-    var currentPlayer = 1;
+var currentPlayer = 1;
 
-    var moves = 0;
+var moves = 0;
 
-    for(;;) {
+for(;;) {
 
-        drawBoard(board);
+    drawBoard(board);
 
-        var playNum = promptUser(currentPlayer);
+    var playNum = promptUser(currentPlayer);
 
-        if (playNum === -1) {
-            console.log('Invalid move, try again.');
-            continue;
-        }
-
-        var row = getRow(playNum);
-
-        var column = getColumn(playNum);
-
-        var valid = makeMove(board, currentPlayer, row, column);
-
-        if (!valid) {
-            console.log(chalk.red('\nInvalid move, try again.\n'));
-            continue;
-        }
-
-        var won = checkStatus(board);
-
-        if (won) {
-            console.log(chalk.green('\n----------------------- Player ' + currentPlayer + ' has won! -----------------------\n'));
-            drawBoard(board);
-            break;
-        } else if (moves === 9) {
-            console.log(chalk.gren('----------------------- THE GAME IS A DRAW! -----------------------'));
-            drawBoard(board);
-            break;
-        }
-
-        currentPlayer = currentPlayer === 1 ? 2 : 1;
+    if (playNum === -1) {
+        console.log('Invalid move, try again.');
+        continue;
     }
 
-    return;
+    var row = getRow(playNum);
+
+    var column = getColumn(playNum);
+
+    var valid = makeMove(board, currentPlayer, row, column);
+
+    if (!valid) {
+        console.log(chalk.red('\nInvalid move, try again.\n'));
+        continue;
+    }
+
+    var won = checkStatus(board);
+
+    if (won) {
+        console.log(chalk.green('\n----------------------- Player ' + currentPlayer + ' has won! -----------------------\n'));
+        drawBoard(board);
+        break;
+    } else if (moves === 9) {
+        console.log(chalk.gren('----------------------- THE GAME IS A DRAW! -----------------------'));
+        drawBoard(board);
+        break;
+    }
+
+    currentPlayer = currentPlayer === 1 ? 2 : 1;
 }
+
+
 
 play();
