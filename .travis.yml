@@ -22,6 +22,7 @@ before_script:
   - sleep 10
   - "psql -c 'create database inbify_test;' -U postgres"
   - 'echo "script.inline: true" | sudo tee -a /etc/elasticsearch/elasticsearch.yml'
+  - 'sudo service elasticsearch restart'
 
 script:
   - "npm test"
