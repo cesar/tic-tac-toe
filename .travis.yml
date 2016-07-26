@@ -7,7 +7,8 @@ services:
   - redis-server
   - postgresql
 
-osx_image: xcode7.3
+jdk:
+  - oraclejdk8
 
 addons:
   apt:
@@ -24,8 +25,14 @@ before_script:
   - sleep 10
   - "psql -c 'create database inbify_test;' -U postgres"
   - 'echo "script.inline: true" | sudo tee -a /etc/elasticsearch/elasticsearch.yml'
+  - 'sudo apt-get update && sudo apt-get install oracle-java8-installer'
+  - 'java -version'
+  - 'sudo update-alternatives --set java /usr/lib/jvm/java-8-oracle/jre/bin/java'
+  - 'java -version'
+  - sleep 5
   - 'sudo service elasticsearch restart'
   - sleep 10
+  - elasticsearch -version
 
 script:
   - "npm test"
