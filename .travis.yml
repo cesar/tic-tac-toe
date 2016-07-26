@@ -21,8 +21,7 @@ addons:
 before_install:
   - 'curl -O https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.4/elasticsearch-2.3.4.deb && sudo dpkg -i --force-confnew elasticsearch-2.3.4.deb && sudo service elasticsearch restart'
 env:
-  - TRAVIS=travis CXX=g++-4.8
-  - NODE_VERSION=4.4.x
+  - TRAVIS=travis CXX=g++-4.8 NODE_VERSION=4.4.x
 
 before_script:
   - sleep 10
