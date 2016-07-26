@@ -24,8 +24,10 @@ before_install:
 before_script:
   - sleep 10
   - "psql -c 'create database inbify_test;' -U postgres"
-  - 'echo "script.inline: true" | sudo tee -a /etc/elasticsearch/elasticsearch.yml'
+  - 'echo "script.inline: true" >> /etc/elasticsearch/elasticsearch.yml'
+  - 'echo "script.indexed: true" >> /etc/elasticsearch/elasticsearch.yml'
   - 'sudo service elasticsearch restart'
+  - sleep 10
 
 script:
   - "npm test"
