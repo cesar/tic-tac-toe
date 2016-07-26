@@ -7,6 +7,8 @@ services:
   - redis-server
   - postgresql
 
+osx_image: xcode7.3
+
 addons:
   apt:
     sources:
@@ -21,7 +23,6 @@ env:
 before_script:
   - sleep 10
   - "psql -c 'create database inbify_test;' -U postgres"
-  - jdk_switcher use oraclejdk8
   - 'echo "script.inline: true" | sudo tee -a /etc/elasticsearch/elasticsearch.yml'
   - 'sudo service elasticsearch restart'
   - sleep 10
