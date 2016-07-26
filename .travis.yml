@@ -18,7 +18,12 @@ addons:
     - gcc-4.8
     - g++-4.8
 
-    
+before_install:
+  - 'sudo apt-get update && sudo apt-get install oracle-java8-installer'
+  - 'java -version'
+  - 'sudo update-alternatives --set java /usr/lib/jvm/java-8-oracle/jre/bin/java'
+  - 'java -version'
+  - 'curl -O https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.4/elasticsearch-2.3.4.deb && sudo dpkg -i --force-confnew elasticsearch-2.3.4.deb && sudo service elasticsearch restart'
 env:
   - TRAVIS=travis CXX=g++-4.8
 
@@ -26,14 +31,9 @@ before_script:
   - sleep 10
   - "psql -c 'create database inbify_test;' -U postgres"
   - 'echo "script.inline: true" | sudo tee -a /etc/elasticsearch/elasticsearch.yml'
-  - 'sudo apt-get update && sudo apt-get install oracle-java8-installer'
-  - 'java -version'
-  - 'sudo update-alternatives --set java /usr/lib/jvm/java-8-oracle/jre/bin/java'
-  - 'java -version'
-  - sleep 5
   - 'sudo service elasticsearch restart'
   - sleep 10
-  - elasticsearch -version
+  - elasticsearch --version
 
 script:
   - "npm test"
