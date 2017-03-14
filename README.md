@@ -1,2 +1,1 @@
-# projects
-Projects for Summerhacks
+# Tic Tac Toe
